@@ -27,11 +27,26 @@
     form {
         display: flex;
         flex-direction: column;
+        width: 40%;
+        margin: 0 auto;
+    }
+
+    .input-container {
+        display: flex;
+        justify-content: space-between;
+        margin: 1em 0;
     }
 </style>
 
 <form on:submit|preventDefault={login}>
-    <input bind:value={userInfo.username} />
-    <input bind:value={userInfo.password} />
+    <div class="input-container">
+        <label for="username">Username: </label>
+        <input bind:value={userInfo.username} name="username" />
+    </div>
+    <div class="input-container">
+        <label type="password" for="password">Password: </label>
+        <input bind:value={userInfo.password} name="password" />
+    </div>
     <input type="submit" value="Login" />
+    <p>Don't have an account? <a href="/auth/register">Register!</a></p>
 </form>

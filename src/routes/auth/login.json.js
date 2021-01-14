@@ -30,4 +30,20 @@ export async function post(req, res) {
   }
 }
 
-export async function put(req, res) {}
+export async function put(req, res) {
+  try {
+    const { refresh_token } = req.body
+    const params = {
+      AuthFlow: 'REFRESH_TOKEN_AUTH',
+      ClientId: process.env.COGNITO_CLIENT_ID,
+      AuthParameters: {
+        REFRESH_TOKEN: refresh_token,
+      },
+    }
+
+    const response = await cognito.initiateAuth(params).promise()
+    res.status(200).json(response)
+  } catch (err) {
+    res.status(400).json(err)
+  }
+}
