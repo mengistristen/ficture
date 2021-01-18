@@ -30,8 +30,8 @@
     <input bind:value={userInfo.username} name="username" />
   </div>
   <div class="input-container">
-    <label type="password" for="password">Password: </label>
-    <input bind:value={userInfo.password} name="password" />
+    <label for="password">Password: </label>
+    <input type="password" bind:value={userInfo.password} name="password" />
   </div>
   <input type="submit" value="Login" />
   <p>Don't have an account? <a href="/auth/register">Register!</a></p>
