@@ -5,7 +5,7 @@ body {
   font-size: 14px;
   line-height: 1.5;
   color: #333;
-  background: linear-gradient(45deg, #70e1f5, #ffd194);
+  background: linear-gradient(45deg, #4daa57, #b5dda4, #f9eccc);
 }
 
 html,
@@ -112,4 +112,10 @@ code {
 
 .auth-form > h1 {
   text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .auth-form {
+    width: 100%;
+  }
 }
