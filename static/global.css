@@ -5,12 +5,19 @@ body {
   font-size: 14px;
   line-height: 1.5;
   color: #333;
+  background: linear-gradient(45deg, #70e1f5, #ffd194);
 }
 
 html,
 body {
   margin: 0;
   height: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 h1,
@@ -45,4 +52,64 @@ code {
   body {
     font-size: 16px;
   }
+}
+
+:root {
+  --input-border: #8b8a8b;
+  --input-focus-h: 175;
+  --input-focus-s: 100%;
+  --input-focus-l: 80%;
+}
+
+.input {
+  font-size: 16px;
+  font-size: max(16px, 1em);
+  font-family: inherit;
+  padding: 0.25em 0.5em;
+  background-color: #fff;
+  border: 2px solid var(--input-border);
+  border-radius: 4px;
+  transition: 180ms box-shadow ease-in-out;
+}
+
+.input:not(textarea) {
+  line-height: 1;
+  height: 2.25rem;
+}
+
+.input:focus {
+  border-color: hsl(
+    var(--input-focus-h),
+    var(--input-focus-s),
+    var(--input-focus-l)
+  );
+  box-shadow: 0 0 0 3px
+    hsla(
+      var(--input-focus-h),
+      var(--input-focus-s),
+      calc(var(--input-focus-l) + 40%),
+      0.8
+    );
+  outline: 3px solid transparent;
+}
+
+.paper {
+  background: white;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  padding: 3em 1em;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin: 0 auto;
+}
+
+.auth-form > * {
+  margin-top: 1em;
+}
+
+.auth-form > h1 {
+  text-align: center;
 }

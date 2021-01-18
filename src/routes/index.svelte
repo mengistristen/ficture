@@ -17,6 +17,7 @@
         })
 
         const { access_token } = await res.json()
+
         $user.access_token = access_token
       } else goto('/auth/login')
     }

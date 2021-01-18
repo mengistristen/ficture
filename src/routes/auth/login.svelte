@@ -24,30 +24,24 @@
   }
 </script>
 
-<form on:submit|preventDefault={login}>
-  <div class="input-container">
-    <label for="username">Username: </label>
-    <input bind:value={userInfo.username} name="username" />
+<form class="paper auth-form" on:submit|preventDefault={login}>
+  <div style="text-align: center">
+    <img src="logo-192.png" alt="ficture logo" height="100" width="100" />
   </div>
-  <div class="input-container">
-    <label for="password">Password: </label>
-    <input type="password" bind:value={userInfo.password} name="password" />
-  </div>
+  <h1>Login</h1>
+  <input
+    class="input"
+    bind:value={userInfo.username}
+    name="username"
+    placeholder="Username"
+  />
+  <input
+    class="input"
+    type="password"
+    bind:value={userInfo.password}
+    name="password"
+    placeholder="Password"
+  />
   <input type="submit" value="Login" />
   <p>Don't have an account? <a href="/auth/register">Register!</a></p>
 </form>
-
-<style>
-  form {
-    display: flex;
-    flex-direction: column;
-    width: 40%;
-    margin: 0 auto;
-  }
-
-  .input-container {
-    display: flex;
-    justify-content: space-between;
-    margin: 1em 0;
-  }
-</style>
