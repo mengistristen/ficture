@@ -56,6 +56,6 @@
     name="confirmPassword"
     placeholder="Confirm Password"
   />
-  <input type="submit" value="Sign Up" />
+  <input class="button" type="submit" value="Sign Up" />
   <p>Already have an account? <a href="/auth/login">Sign in!</a></p>
 </form>

@@ -18,7 +18,6 @@
       const tokenData = await res.json()
 
       $user = tokenData
-      console.log($user)
       goto('/')
     }
   }
@@ -42,6 +41,6 @@
     name="password"
     placeholder="Password"
   />
-  <input type="submit" value="Login" />
+  <input class="button" type="submit" value="Login" />
   <p>Don't have an account? <a href="/auth/register">Register!</a></p>
 </form>
