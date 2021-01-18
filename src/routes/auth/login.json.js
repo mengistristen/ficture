@@ -11,8 +11,8 @@ export async function post(req, res) {
       ClientId: process.env.COGNITO_CLIENT_ID,
       AuthParameters: {
         USERNAME: username,
-        PASSWORD: password,
-      },
+        PASSWORD: password
+      }
     }
 
     const response = await cognito.initiateAuth(params).promise()
@@ -23,7 +23,7 @@ export async function post(req, res) {
 
     res.status(201).json({
       access_token: AccessToken,
-      refresh_token: RefreshToken,
+      refresh_token: RefreshToken
     })
   } catch (err) {
     res.status(400).json(err)
@@ -37,12 +37,14 @@ export async function put(req, res) {
       AuthFlow: 'REFRESH_TOKEN_AUTH',
       ClientId: process.env.COGNITO_CLIENT_ID,
       AuthParameters: {
-        REFRESH_TOKEN: refresh_token,
-      },
+        REFRESH_TOKEN: refresh_token
+      }
     }
 
     const response = await cognito.initiateAuth(params).promise()
-    res.status(200).json(response)
+    res
+      .status(200)
+      .json({ access_token: response.AuthenticationResult.AccessToken })
   } catch (err) {
     res.status(400).json(err)
   }
