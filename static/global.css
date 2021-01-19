@@ -57,9 +57,9 @@ code {
 
 :root {
   --input-border: #8b8a8b;
-  --input-focus-h: 175;
-  --input-focus-s: 100%;
-  --input-focus-l: 80%;
+  --input-focus-h: 126;
+  --input-focus-s: 38%;
+  --input-focus-l: 48%;
 }
 
 .input {
@@ -85,6 +85,10 @@ code {
   border-radius: 4px;
   background-color: #4daa57;
   color: white;
+}
+
+.button[disabled] {
+  background-color: #c7c7c7;
 }
 
 .input:focus {

@@ -21,11 +21,13 @@
       goto('/')
     }
   }
+
+  $: canSubmit = !!userInfo.username && !!userInfo.password
 </script>
 
 <form class="paper auth-form" on:submit|preventDefault={login}>
   <div style="text-align: center">
-    <img src="logo-192.png" alt="ficture logo" height="100" width="100" />
+    <img src="logo-512.png" alt="ficture logo" height="100" width="100" />
   </div>
   <h1>Login</h1>
   <input
@@ -41,6 +43,10 @@
     name="password"
     placeholder="Password"
   />
-  <input class="button" type="submit" value="Login" />
+  {#if canSubmit}
+    <input class="button" type="submit" value="Login" />
+  {:else}
+    <button class="button" disabled>Login</button>
+  {/if}
   <p>Don't have an account? <a href="/auth/register">Register!</a></p>
 </form>

@@ -8,6 +8,15 @@
     email: '',
   }
 
+  const validators = [
+    (user) =>
+      !!user.username &&
+      !!user.password &&
+      !!user.email &&
+      !!user.confirmPassword,
+    (user) => user.confirmPassword === user.password,
+  ]
+
   const submit = async () => {
     try {
       const res = await fetch('/auth/register.json', {
@@ -23,11 +32,13 @@
       console.log(err)
     }
   }
+
+  $: canSubmit = validators.every((validator) => validator(newUser))
 </script>
 
 <form class="paper auth-form" on:submit|preventDefault={submit}>
   <div style="text-align: center">
-    <img src="logo-192.png" alt="ficture logo" height="100" width="100" />
+    <img src="logo-512.png" alt="ficture logo" height="100" width="100" />
   </div>
   <h1>Sign Up</h1>
   <input
@@ -56,6 +67,10 @@
     name="confirmPassword"
     placeholder="Confirm Password"
   />
-  <input class="button" type="submit" value="Sign Up" />
+  {#if canSubmit}
+    <input class="button" type="submit" value="Sign Up" />
+  {:else}
+    <button class="button" disabled>Sign Up</button>
+  {/if}
   <p>Already have an account? <a href="/auth/login">Sign in!</a></p>
 </form>

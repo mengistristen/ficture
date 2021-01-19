@@ -25,3 +25,4 @@
 </script>
 
 <h1>Home</h1>
+<a href="/auth/change-password">change password</a>
