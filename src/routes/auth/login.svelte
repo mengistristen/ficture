@@ -25,6 +25,8 @@
   $: canSubmit = !!userInfo.username && !!userInfo.password
 </script>
 
+<svelte:head><title>Ficture | Login</title></svelte:head>
+
 <form class="paper auth-form" on:submit|preventDefault={login}>
   <div style="text-align: center">
     <img src="logo-512.png" alt="ficture logo" height="100" width="100" />

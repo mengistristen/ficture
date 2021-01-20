@@ -34,6 +34,8 @@
   $: canSubmit = validators.every((validator) => validator(passwords))
 </script>
 
+<svelte:head><title>Ficture | Update Password</title></svelte:head>
+
 <form class="paper auth-form" on:submit|preventDefault={updatePassword}>
   <div style="text-align: center">
     <img src="logo-512.png" alt="ficture logo" height="100" width="100" />

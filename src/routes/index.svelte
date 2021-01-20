@@ -24,5 +24,6 @@
   })
 </script>
 
+<svelte:head><title>Ficture | Home</title></svelte:head>
 <h1>Home</h1>
 <a href="/auth/change-password">change password</a>
