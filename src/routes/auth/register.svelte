@@ -5,7 +5,7 @@
     username: '',
     password: '',
     confirmPassword: '',
-    email: '',
+    email: ''
   }
 
   const validators = [
@@ -14,7 +14,7 @@
       !!user.password &&
       !!user.email &&
       !!user.confirmPassword,
-    (user) => user.confirmPassword === user.password,
+    (user) => user.confirmPassword === user.password
   ]
 
   const submit = async () => {
@@ -22,7 +22,7 @@
       const res = await fetch('/auth/register.json', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newUser),
+        body: JSON.stringify(newUser)
       })
 
       if (res.status === 201) {
