@@ -18,10 +18,12 @@ export async function post(req, res) {
     const response = await cognito.initiateAuth(params).promise()
     const { AccessToken, RefreshToken } = response.AuthenticationResult
 
+    req.session.username = username
     req.session.access_token = AccessToken
     req.session.refresh_token = RefreshToken
 
     res.status(201).json({
+      username,
       access_token: AccessToken,
       refresh_token: RefreshToken
     })
