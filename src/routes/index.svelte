@@ -73,7 +73,7 @@
     <button on:click={logout}>logout</button>
     <ficture-canvas style="margin-top: 2em;" height={256} width={256} />
     {#if model}
-      <button class="button" on:click={generate}>Generate!</button>
+      <button class="button" on:click={generate}>Generate World Map</button>
     {/if}
   </div>
 </div>
@@ -81,9 +81,13 @@
 {#if modalOpen}
   <div class="modal">
     <div class="modal-content">
-      <span class="close" on:click={() => (modalOpen = false)}>&times;</span>
-      <input placeholder="Name" />
-      <canvas id="result-canvas" height="256" width="256" />
+      <div class="close" on:click={() => (modalOpen = false)}>&times;</div>
+      <h1>Generated!</h1>
+      <div class="map-controls">
+        <input class="input" placeholder="Name your map!" />
+        <canvas id="result-canvas" height="256" width="256" />
+        <button class="button">Save</button>
+      </div>
     </div>
   </div>
 {/if}
@@ -107,21 +111,30 @@
 
   .modal-content {
     background-color: white;
-    margin: 15% auto;
+    margin: 20% auto;
+    width: fit-content;
     padding: 20px;
-    width: 80%;
     border-radius: 10px;
     box-shadow: 0 0 10px 0 #333;
+  }
+
+  .map-controls {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+  }
+
+  .map-controls *:not(canvas) {
+    margin: 10px;
+    width: 100%;
   }
 
   .close {
     color: #aaa;
-    float: right;
     font-size: 28px;
     font-weight: bold;
+    text-align: right;
   }
 
   .close:hover,
@@ -129,5 +142,9 @@
     color: black;
     text-decoration: none;
     cursor: pointer;
+  }
+
+  #result-canvas {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   }
 </style>

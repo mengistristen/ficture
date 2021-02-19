@@ -14,8 +14,8 @@
 
 <style>
   header img {
-    height: 50px;
-    margin: 5px;
+    height: 40px;
+    margin: 10px;
     margin-left: 40px;
   }
 
