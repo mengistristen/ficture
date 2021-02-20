@@ -60,6 +60,26 @@
     const resultCanvas = document.querySelector('#result-canvas')
     await tf.browser.toPixels(output, resultCanvas)
   }
+
+  const save = () => {
+    const resultCanvas = document.querySelector('#result-canvas')
+    const mapName = document.querySelector('#map-name')
+
+    resultCanvas.toBlob(async (file) => {
+      const formData = new FormData()
+
+      formData.append(
+        'file',
+        file,
+        `${mapName.value.toLowerCase().replaceAll(' ', '_')}.jpeg`
+      )
+
+      const response = await fetch('/maps.json', {
+        method: 'POST',
+        body: formData
+      })
+    }, 'image/jpeg')
+  }
 </script>
 
 <svelte:head><title>Ficture | Home</title></svelte:head>
@@ -71,7 +91,7 @@
   <div style="display: flex; flex-direction: column; align-items: center;">
     <a href="/auth/change-password">change password</a>
     <button on:click={logout}>logout</button>
-    <ficture-canvas style="margin-top: 2em;" height={256} width={256} />
+    <ficture-canvas height={256} width={256} />
     {#if model}
       <button class="button" on:click={generate}>Generate World Map</button>
     {/if}
@@ -84,9 +104,9 @@
       <div class="close" on:click={() => (modalOpen = false)}>&times;</div>
       <h1>Generated!</h1>
       <div class="map-controls">
-        <input class="input" placeholder="Name your map!" />
+        <input id="map-name" class="input" placeholder="Name your map!" />
         <canvas id="result-canvas" height="256" width="256" />
-        <button class="button">Save</button>
+        <button class="button" on:click={save}>Save</button>
       </div>
     </div>
   </div>
@@ -146,5 +166,12 @@
 
   #result-canvas {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  }
+
+  ficture-canvas {
+    padding: 20px;
+    background-color: #999;
+    border-radius: 10px;
+    margin: 2em 0;
   }
 </style>

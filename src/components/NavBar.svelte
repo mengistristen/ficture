@@ -4,6 +4,7 @@
 
 <header>
   <img src="logo-512.png" alt="ficture logo" />
+  <p><strong>Ficture</strong></p>
   <nav>
     <ul>
       <li><a href="/home">Home</a></li>
