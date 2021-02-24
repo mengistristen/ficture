@@ -1,63 +1,72 @@
-import multer from 'multer'
-import multers3 from 'multer-s3'
-import * as aws from 'aws-sdk'
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'
+import { v4 as uuidv4 } from 'uuid'
 import path from 'path'
+import { Map } from '../../models/Map'
 
-const s3 = new aws.S3({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  region: 'us-west-2',
-  params: {
-    bucket: 'ficture-bucket'
-  }
+const s3 = new S3Client({
+  region: 'us-west-2'
 })
 
-const imageUpload = multer({
-  storage: multers3({
-    s3,
-    bucket: 'ficture-bucket',
-    acl: 'public-read',
-    key: (req, file, cb) => {
-      cb(
-        null,
-        `${path.basename(
-          file.originalname,
-          path.extname(file.originalname)
-        )}-${Date.now()}${path.extname(file.originalname)}`
-      )
+export async function post(req, res) {
+  try {
+    const { file } = req
+    const { username, name } = req.body
+    const fileTypes = /jpeg|jpg/
+
+    if (!file || !username || !name)
+      throw new Error('missing required attributes')
+
+    if (!fileTypes.test(path.extname(file.originalname).toLowerCase()))
+      throw new Error('file must be a jpeg image')
+
+    const key = `${path.basename(
+      file.originalname,
+      path.extname(file.originalname)
+    )}-${Date.now()}${path.extname(file.originalname)}`
+    const link = `https://ficture-bucket.s3-us-west-2.amazonaws.com/${key}`
+
+    const params = {
+      Body: file.buffer,
+      Bucket: 'ficture-bucket',
+      Key: key,
+      ACL: 'public-read'
     }
-  }),
-  limits: {
-    filesize: 2000000
-  },
-  fileFilter: (req, file, cb) => {
-    checkFileType(file, cb)
+
+    const command = new PutObjectCommand(params)
+
+    await s3.send(command)
+
+    const map = new Map({
+      mapId: uuidv4(),
+      user: username,
+      location: link,
+      name
+    })
+
+    await map.save()
+
+    res.sendStatus(201)
+  } catch (err) {
+    res.status(403).json(err)
   }
-}).single('file')
-
-const checkFileType = (file, cb) => {
-  const fileTypes = /jpeg|jpg|png/
-  const extname = fileTypes.test(path.extname(file.originalname).toLowerCase())
-  const mimetype = fileTypes.test(file.mimetype)
-
-  if (mimetype && extname) cb(null, true)
-  else cb('Error: images only')
 }
 
-export function post(req, res) {
-  imageUpload(req, res, (error) => {
-    if (error) res.status(403).json({ error })
-    else {
-      if (!req.file) res.status(404).json({ messasge: 'Error: no file found' })
-      else {
-        const filename = req.file.key
-        const location = req.file.location
+export async function get(req, res) {
+  try {
+    const { username } = req.query
 
-        res.status(201).json({
-          filename,
-          location
-        })
-      }
-    }
-  })
+    if (!username) throw new Error('missing required username query param')
+
+    const maps = await Map.find({ user: username })
+
+    res.status(200).json(
+      maps.map((map) => {
+        const { mapId, user, location, name } = map
+
+        return { mapId, user, location, name }
+      })
+    )
+  } catch (err) {
+    res.status(403).json(err)
+  }
 }

@@ -4,7 +4,7 @@ import { cognito } from '../../cognito'
 export async function post(req, res) {
   try {
     const { username, password } = req.body
-
+    console.log({ username, password })
     if (!username || !password) throw new Error('Missing required attributes')
 
     const params = {

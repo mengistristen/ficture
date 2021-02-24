@@ -7,6 +7,7 @@
 
   let model
   let modalOpen = false
+  let mapName = ''
 
   onMount(async () => {
     if (!$user.access_token || !$user.refresh_token || !$user.username) {
@@ -33,10 +34,8 @@
   })
 
   const logout = async () => {
-    console.log('logging out')
     $user = {}
     await fetch('/auth/logout.json')
-    console.log('after fetch')
     goto('/auth/login')
   }
 
@@ -65,7 +64,6 @@
 
   const save = () => {
     const resultCanvas = document.querySelector('#result-canvas')
-    const mapName = document.querySelector('#map-name')
 
     resultCanvas.toBlob(async (file) => {
       const formData = new FormData()
@@ -73,10 +71,13 @@
       formData.append(
         'file',
         file,
-        `${mapName.value.toLowerCase().replaceAll(' ', '_')}.jpeg`
+        `${mapName.toLowerCase().replaceAll(' ', '_')}.jpeg`
       )
 
-      const response = await fetch('/maps.json', {
+      formData.append('username', $user.username)
+      formData.append('name', mapName)
+
+      await fetch('/maps.json', {
         method: 'POST',
         body: formData
       })
@@ -111,7 +112,11 @@
       <div class="close" on:click={() => (modalOpen = false)}>&times;</div>
       <h1>Generated!</h1>
       <div class="map-controls">
-        <input id="map-name" class="input" placeholder="Name your map!" />
+        <input
+          class="input"
+          placeholder="Name your map!"
+          bind:value={mapName}
+        />
         <canvas id="result-canvas" height="256" width="256" />
         <button class="button" on:click={save}>Save</button>
       </div>

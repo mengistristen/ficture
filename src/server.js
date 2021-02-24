@@ -7,10 +7,12 @@ import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import connectMongo from 'connect-mongo'
 import * as sapper from '@sapper/server'
+import multer from 'multer'
 
 const { PORT, NODE_ENV } = process.env
 const dev = NODE_ENV === 'development'
 const MongoStore = connectMongo(session)
+const upload = multer()
 
 dotenv.config()
 
@@ -20,6 +22,7 @@ mongoose.connect(process.env.MONGO_URI, {
 })
 
 express()
+  .use('/maps.json', upload.single('file'))
   .use(
     bodyParser.json(),
     compression({ threshold: 0 }),
