@@ -1,6 +1,6 @@
 export function get(req, res) {
-  console.log('logging out')
-  req.session.access_token = null
-  req.session.refresh_token = null
+  req.session.access_token = undefined
+  req.session.refresh_token = undefined
+  req.session.username = undefined
   res.redirect('/auth/login')
 }

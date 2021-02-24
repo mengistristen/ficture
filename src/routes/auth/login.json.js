@@ -4,7 +4,7 @@ import { cognito } from '../../cognito'
 export async function post(req, res) {
   try {
     const { username, password } = req.body
-    console.log({ username, password })
+
     if (!username || !password) throw new Error('Missing required attributes')
 
     const params = {
@@ -48,6 +48,7 @@ export async function put(req, res) {
 
     const command = new InitiateAuthCommand(params)
     const response = await cognito.send(command)
+
     res
       .status(200)
       .json({ access_token: response.AuthenticationResult.AccessToken })

@@ -7,7 +7,7 @@
 
       const maps = await response.json()
 
-      return { maps }
+      return { maps, user: username }
     } catch (err) {
       return { maps: [] }
     }
@@ -17,6 +17,7 @@
 <script>
   import { goto } from '@sapper/app'
   export let maps = []
+  export let user
 
   let username
 
@@ -25,6 +26,14 @@
     goto(`/maps?username=${username}`)
   }
 </script>
+
+<svelte:head>
+  {#if user}
+    <title>Ficture | {user}'s maps</title>
+  {:else}
+    <title>Ficture | Maps</title>
+  {/if}
+</svelte:head>
 
 <div class="paper view">
   <img src="logo-512.png" alt="ficture logo" />
