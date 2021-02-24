@@ -4,6 +4,8 @@ import * as aws from 'aws-sdk'
 import path from 'path'
 
 const s3 = new aws.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   region: 'us-west-2',
   params: {
     bucket: 'ficture-bucket'
@@ -18,12 +20,10 @@ const imageUpload = multer({
     key: (req, file, cb) => {
       cb(
         null,
-        path.basename(
+        `${path.basename(
           file.originalname,
-          `${path.extname(file.originalname)}-${Date.now()}${path.extname(
-            file.originalname
-          )}`
-        )
+          path.extname(file.originalname)
+        )}-${Date.now()}${path.extname(file.originalname)}`
       )
     }
   }),

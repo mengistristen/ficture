@@ -1,3 +1,4 @@
+import { SignUpCommand } from '@aws-sdk/client-cognito-identity-provider'
 import { cognito } from '../../cognito'
 
 export async function post(req, res) {
@@ -14,12 +15,13 @@ export async function post(req, res) {
       UserAttributes: [
         {
           Name: 'email',
-          Value: email,
-        },
-      ],
+          Value: email
+        }
+      ]
     }
 
-    await cognito.signUp(params).promise()
+    const command = new SignUpCommand(params)
+    await cognito.send(command)
 
     res.sendStatus(201)
   } catch (err) {

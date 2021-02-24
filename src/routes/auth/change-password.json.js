@@ -1,3 +1,4 @@
+import { ChangePasswordCommand } from '@aws-sdk/client-cognito-identity-provider'
 import { cognito } from '../../cognito'
 
 export async function post(req, res) {
@@ -9,7 +10,8 @@ export async function post(req, res) {
       ProposedPassword
     }
 
-    await cognito.changePassword(params).promise()
+    const command = new ChangePasswordCommand(params)
+    await cognito.send(command)
     res.sendStatus(200)
   } catch (err) {
     res.status(400).json(err)

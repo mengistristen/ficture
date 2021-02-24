@@ -205,6 +205,14 @@ class FictureCanvas extends HTMLElement {
   getCanvas() {
     return this.shadow.querySelector('canvas')
   }
+
+  clear() {
+    const canvas = this.shadow.querySelector('canvas')
+    const ctx = canvas.getContext('2d')
+
+    ctx.fillStyle = '#fff'
+    ctx.fillRect(0, 0, this.width, this.height)
+  }
 }
 
 customElements.define('ficture-canvas', FictureCanvas)

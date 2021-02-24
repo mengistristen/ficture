@@ -5,12 +5,12 @@
 
   const passwords = {
     PreviousPassword: '',
-    ProposedPassword: '',
+    ProposedPassword: ''
   }
 
   const validators = [
     (obj) => !!obj.PreviousPassword && !!obj.ProposedPassword,
-    (obj) => obj.PreviousPassword !== obj.ProposedPassword,
+    (obj) => obj.PreviousPassword !== obj.ProposedPassword
   ]
 
   onMount(() => {
@@ -18,16 +18,17 @@
   })
 
   const updatePassword = async () => {
+    console.log('updating')
     const res = await fetch('/auth/change-password.json', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         AccessToken: $user.access_token,
         PreviousPassword: passwords.PreviousPassword,
-        ProposedPassword: passwords.ProposedPassword,
-      }),
+        ProposedPassword: passwords.ProposedPassword
+      })
     })
-
+    console.log('fetched')
     if (res.status === 200) goto('/')
   }
 

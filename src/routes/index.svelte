@@ -33,8 +33,10 @@
   })
 
   const logout = async () => {
+    console.log('logging out')
     $user = {}
     await fetch('/auth/logout.json')
+    console.log('after fetch')
     goto('/auth/login')
   }
 
@@ -78,6 +80,11 @@
         method: 'POST',
         body: formData
       })
+
+      const fictureCanvas = document.querySelector('ficture-canvas')
+
+      fictureCanvas.clear()
+      modalOpen = false
     }, 'image/jpeg')
   }
 </script>
@@ -87,7 +94,7 @@
 
 <div class="paper">
   <h1>Welcome to Ficture!</h1>
-  <p>Draw on the canvas to get started.</p>
+  <p>Draw on the canvas below to get started.</p>
   <div style="display: flex; flex-direction: column; align-items: center;">
     <a href="/auth/change-password">change password</a>
     <button on:click={logout}>logout</button>

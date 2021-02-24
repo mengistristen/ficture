@@ -1,5 +1,5 @@
-import * as aws from 'aws-sdk'
+import { CognitoIdentityProviderClient } from '@aws-sdk/client-cognito-identity-provider'
 
-export const cognito = new aws.CognitoIdentityServiceProvider({
+export const cognito = new CognitoIdentityProviderClient({
   region: 'us-west-2'
 })
