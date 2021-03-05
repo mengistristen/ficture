@@ -40,26 +40,39 @@
   }
 
   const generate = async () => {
-    const canvas = document.querySelector('ficture-canvas')
+    const canvas = document.querySelector('ficture-canvas').getCanvas()
+    const ctx = canvas.getContext('2d')
     modalOpen = true
 
-    // get user drawing from canvas and scale from -1 to 1
-    let image = tf.browser.fromPixels(canvas.getCanvas())
-    image = (await image.array()).map((row) =>
-      row.map((column) => column.map((item) => (2 / 255) * item - 1))
-    )
+    //  grab user drawing
+    const tempImage = new Image()
+    tempImage.src = canvas.toDataURL()
 
-    // get input tensor and predict with model
-    // scale output from 0 - 255
-    const input = tf.tensor([image])
-    let output = (await model.predict(input).array())[0]
-    output = output.map((row) =>
-      row.map((column) => column.map((item) => (255 / 2) * item + 255 / 2))
-    )
+    tempImage.onload = async () => {
+      //  create image with white background and user drawing
+      ctx.fillStyle = '#fff'
+      ctx.fillRect(0, 0, 256, 256)
+      ctx.drawImage(tempImage, 0, 0)
 
-    // write image to canvas
-    const resultCanvas = document.querySelector('#result-canvas')
-    await tf.browser.toPixels(output, resultCanvas)
+      // scale modified drawing from -1 to 1
+      let image = tf.browser.fromPixels(canvas, 3)
+      console.log({ image: await image.array() })
+      image = (await image.array()).map((row) =>
+        row.map((column) => column.map((item) => (2 / 255) * item - 1))
+      )
+
+      // get input tensor and predict with model
+      // scale output from 0 - 255
+      const input = tf.tensor([image])
+      let output = (await model.predict(input).array())[0]
+      output = output.map((row) =>
+        row.map((column) => column.map((item) => (255 / 2) * item + 255 / 2))
+      )
+
+      // write image to canvas
+      const resultCanvas = document.querySelector('#result-canvas')
+      await tf.browser.toPixels(output, resultCanvas)
+    }
   }
 
   const save = () => {
@@ -82,11 +95,14 @@
         body: formData
       })
 
-      const fictureCanvas = document.querySelector('ficture-canvas')
-
-      fictureCanvas.clear()
-      modalOpen = false
+      closeModal()
     }, 'image/jpeg')
+  }
+
+  const closeModal = () => {
+    document.querySelector('ficture-canvas').clear()
+    modalOpen = false
+    mapName = ''
   }
 </script>
 
@@ -99,7 +115,10 @@
   <div style="display: flex; flex-direction: column; align-items: center;">
     <a href="/auth/change-password">change password</a>
     <button on:click={logout}>logout</button>
-    <ficture-canvas height={256} width={256} />
+    <div class="canvas-container">
+      <div id="bottom" />
+      <ficture-canvas id="top" height={256} width={256} />
+    </div>
     {#if model}
       <button class="button" on:click={generate}>Generate World Map</button>
     {/if}
@@ -109,7 +128,7 @@
 {#if modalOpen}
   <div class="modal">
     <div class="modal-content">
-      <div class="close" on:click={() => (modalOpen = false)}>&times;</div>
+      <div class="close" on:click={closeModal}>&times;</div>
       <h1>Generated!</h1>
       <div class="map-controls">
         <input
@@ -139,6 +158,7 @@
     overflow: auto;
     background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
+    z-index: 3;
   }
 
   .modal-content {
@@ -180,10 +200,28 @@
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   }
 
-  ficture-canvas {
+  .canvas-container {
     padding: 20px;
     background-color: #999;
     border-radius: 10px;
     margin: 2em 0;
+    position: relative;
+  }
+
+  #top {
+    position: relative;
+    z-index: 2;
+    left: 0;
+    height: 256px;
+    width: 256px;
+  }
+
+  #bottom {
+    position: absolute;
+    z-index: 1;
+    left: 20px;
+    height: 256px;
+    width: 256px;
+    background: white;
   }
 </style>

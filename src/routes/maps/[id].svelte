@@ -15,6 +15,7 @@
 </script>
 
 <script>
+  import { user } from '../../stores'
   export let map = {}
 </script>
 
@@ -29,6 +30,9 @@
     <img class="map-image" src={map.location} alt="{map.user}'s map" />
   {/if}
 </div>
+{#if $user.access_token}
+  <button>delete</button>
+{/if}
 
 <style>
   div {
