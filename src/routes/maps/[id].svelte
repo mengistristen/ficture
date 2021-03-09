@@ -15,8 +15,19 @@
 </script>
 
 <script>
+  import { goto } from '@sapper/app'
   import { user } from '../../stores'
   export let map = {}
+
+  const deleteMap = async () => {
+    if (confirm('Are you sure you want to delete this map?')) {
+      const res = await fetch(`/maps/${map.mapId}.json`, { method: 'DELETE' })
+
+      if (res.status === 200) {
+        goto(`/maps?username=${map.user}`)
+      }
+    }
+  }
 </script>
 
 <div class="paper">
@@ -28,11 +39,16 @@
     <h2>{map.name}</h2>
     <p>by {map.user}</p>
     <img class="map-image" src={map.location} alt="{map.user}'s map" />
+
+    {#if $user.access_token}
+      <div style="margin: 10px auto;">
+        <button class="button-error" on:click={deleteMap}
+          >Delete World Map</button
+        >
+      </div>
+    {/if}
   {/if}
 </div>
-{#if $user.access_token}
-  <button>delete</button>
-{/if}
 
 <style>
   div {

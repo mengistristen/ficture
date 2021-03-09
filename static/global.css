@@ -87,6 +87,24 @@ code {
   color: white;
 }
 
+.button-secondary {
+  line-height: 1;
+  height: 2.25rem;
+  border: 2px solid #4daa57;
+  border-radius: 4px;
+  color: #4daa57;
+  background-color: white;
+}
+
+.button-error {
+  line-height: 1;
+  height: 2.25rem;
+  border: 2px solid red;
+  border-radius: 4px;
+  color: red;
+  background-color: white;
+}
+
 .button[disabled] {
   background-color: #c7c7c7;
 }

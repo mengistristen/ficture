@@ -8,6 +8,7 @@
   let model
   let modalOpen = false
   let mapName = ''
+  let exampleImage = ''
 
   onMount(async () => {
     if (!$user.access_token || !$user.refresh_token || !$user.username) {
@@ -100,9 +101,28 @@
   }
 
   const closeModal = () => {
-    document.querySelector('ficture-canvas').clear()
     modalOpen = false
     mapName = ''
+
+    document.querySelector('ficture-canvas').clear()
+    clearExample()
+  }
+
+  const loadExample = () => {
+    const background = document.querySelector('#bottom')
+    const imageNum = Math.floor(Math.random() * 5 + 1)
+
+    exampleImage = `example_${imageNum}.jpg`
+    background.style.background = `url(${exampleImage})`
+    background.style.opacity = 0.6
+  }
+
+  const clearExample = () => {
+    const background = document.querySelector('#bottom')
+
+    exampleImage = ''
+    background.style.background = 'white'
+    background.style.opacity = 1
   }
 </script>
 
@@ -115,6 +135,11 @@
   <div style="display: flex; flex-direction: column; align-items: center;">
     <a href="/auth/change-password">change password</a>
     <button on:click={logout}>logout</button>
+    <div>
+      <p>Need Help?</p>
+      <button class="button" on:click={loadExample}>Load Example</button>
+      <button class="button-secondary" on:click={clearExample}>Clear</button>
+    </div>
     <div class="canvas-container">
       <div id="bottom" />
       <ficture-canvas id="top" height={256} width={256} />
@@ -124,7 +149,6 @@
     {/if}
   </div>
 </div>
-
 {#if modalOpen}
   <div class="modal">
     <div class="modal-content">
@@ -136,7 +160,18 @@
           placeholder="Name your map!"
           bind:value={mapName}
         />
-        <canvas id="result-canvas" height="256" width="256" />
+        <div id="comparison">
+          {#if exampleImage}
+            <img
+              src={exampleImage}
+              height="256px"
+              width="256px"
+              alt="comparison"
+              style="box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);"
+            />
+          {/if}
+          <canvas id="result-canvas" height="256" width="256" />
+        </div>
         <button class="button" on:click={save}>Save</button>
       </div>
     </div>
@@ -223,5 +258,16 @@
     height: 256px;
     width: 256px;
     background: white;
+  }
+
+  #comparison {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #comparison > * {
+    height: 256px;
+    width: 256px;
   }
 </style>
