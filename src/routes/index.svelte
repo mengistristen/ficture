@@ -34,12 +34,6 @@
     model = await tf.loadLayersModel('/model/model.json')
   })
 
-  const logout = async () => {
-    $user = {}
-    await fetch('/auth/logout.json')
-    goto('/auth/login')
-  }
-
   const generate = async () => {
     const canvas = document.querySelector('ficture-canvas').getCanvas()
     const ctx = canvas.getContext('2d')
@@ -133,8 +127,6 @@
   <h1>Welcome to Ficture!</h1>
   <p>Draw on the canvas below to get started.</p>
   <div style="display: flex; flex-direction: column; align-items: center;">
-    <a href="/auth/change-password">change password</a>
-    <button on:click={logout}>logout</button>
     <div>
       <p>Need Help?</p>
       <button class="button" on:click={loadExample}>Load Example</button>
@@ -142,7 +134,7 @@
     </div>
     <div class="canvas-container">
       <div id="bottom" />
-      <ficture-canvas id="top" height={256} width={256} />
+      <ficture-canvas id="top" height="256" width="256" />
     </div>
     {#if model}
       <button class="button" on:click={generate}>Generate World Map</button>
@@ -172,7 +164,11 @@
           {/if}
           <canvas id="result-canvas" height="256" width="256" />
         </div>
-        <button class="button" on:click={save}>Save</button>
+        {#if mapName}
+          <button class="button" on:click={save}>Save</button>
+        {:else}
+          <button class="button" disabled>Save</button>
+        {/if}
       </div>
     </div>
   </div>
