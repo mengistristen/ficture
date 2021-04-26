@@ -13,13 +13,15 @@
   <img src="logo-512.png" alt="ficture logo" />
   <div class="controls">
     <nav>
-      <p><strong><a href="/home">Ficture</a></strong></p>
+      <p><strong><a href="/">Ficture</a></strong></p>
       <p><a href="/maps?username={$user.username}">Maps</a></p>
     </nav>
-    <div class="user-controls">
-      <a href="/auth/change-password">Change Password</a>
-      <button class="button" on:click={logout}>Logout</button>
-    </div>
+    {#if $user.username}
+      <div class="user-controls">
+        <a href="/auth/change-password">Change Password</a>
+        <button class="button" on:click={logout}>Logout</button>
+      </div>
+    {/if}
   </div>
 </header>
 
@@ -32,12 +34,9 @@
 
   header {
     background-color: white;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    box-shadow: 0 0 25px 0 black;
+    box-shadow: 0 0 5px 0 black;
     display: flex;
+    z-index: 1;
   }
 
   nav {
@@ -63,6 +62,8 @@
   }
 
   .user-controls {
+    display: flex;
+    align-items: baseline;
     gap: 1em;
   }
 </style>

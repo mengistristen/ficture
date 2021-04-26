@@ -60,3 +60,10 @@
     <button class="button" disabled>Update Password</button>
   {/if}
 </form>
+
+<style>
+  form {
+    max-width: 300px;
+    margin: 1em auto;
+  }
+</style>

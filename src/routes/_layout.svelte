@@ -1,14 +1,8 @@
-<main>
-  <slot />
-</main>
+<script>
+  import NavBar from '../components/NavBar.svelte'
+  import Footer from '../components/Footer.svelte'
+</script>
 
-<style>
-  main {
-    position: relative;
-    max-width: 56em;
-    background-color: transparent;
-    padding: 2em;
-    margin: 60px auto;
-    box-sizing: border-box;
-  }
-</style>
+<NavBar />
+<slot />
+<Footer />

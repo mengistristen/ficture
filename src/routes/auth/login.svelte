@@ -4,14 +4,14 @@
 
   const userInfo = {
     username: '',
-    password: '',
+    password: ''
   }
 
   const login = async () => {
     const res = await fetch('/auth/login.json', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(userInfo),
+      body: JSON.stringify(userInfo)
     })
 
     if (res.status == 201) {
@@ -52,3 +52,10 @@
   {/if}
   <p>Don't have an account? <a href="/auth/register">Register!</a></p>
 </form>
+
+<style>
+  form {
+    max-width: 300px;
+    margin: 1em auto;
+  }
+</style>

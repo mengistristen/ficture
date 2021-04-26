@@ -52,6 +52,8 @@
 
 <style>
   div {
+    max-width: 1000px;
+    margin: 1em auto;
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -112,8 +112,8 @@ class FictureCanvas extends HTMLElement {
     this.shadow.appendChild(template.content.cloneNode(true))
 
     // Set attributes
-    this.height = Number.parseInt(this.getAttribute('height')) || 500
-    this.width = Number.parseInt(this.getAttribute('width')) || 500
+    this.height = Number.parseInt(this.getAttribute('height')) || 256
+    this.width = Number.parseInt(this.getAttribute('width')) || 256
     this.lineWidth = Number.parseInt(this.getAttribute('line-width')) || 3
     this.setPenColor(this.getAttribute('color') || '#000')
 
