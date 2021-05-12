@@ -107,6 +107,7 @@
 
     exampleImage = `example_${imageNum}.jpg`
     background.style.background = `url(${exampleImage})`
+    background.style.backgroundSize = 'contain'
     background.style.opacity = 0.6
   }
 
@@ -115,7 +116,10 @@
 
     exampleImage = ''
     background.style.background = 'white'
+    background.style.backgroundSize = 'initial'
     background.style.opacity = 1
+
+    document.querySelector('ficture-canvas').clear()
   }
 </script>
 

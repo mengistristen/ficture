@@ -1,7 +1,7 @@
 <div class="paper">
   <h1>About Ficture</h1>
   <p>
-    Ficture is made up of 4 seperate peices: the <a
+    Ficture is made up of 4 seperate pieces: the <a
       href="https://github.com/mengistristen/ficture-terraingen"
       target="_blank">dataset generation</a
     >, the
@@ -70,6 +70,13 @@
     with <a href="https://sapper.svelte.dev" target="_blank">Sapper</a>. The
     neural network is loaded and run using
     <a href="https://www.tensorflow.org/js" target="_blank">TensorFlow.js</a>.
+    Authentication is provided by
+    <a href="https://aws.amazon.com/cognito/" target="_blank">Amazon Cognito</a
+    >, and the app is hosted on
+    <a href="https://www.heroku.com/" target="_blank">Heroku</a>. The main
+    feature of the app is showcased on the right with the usage of the
+    <code>ficture-canvas</code> web component that I introduced earlier. For this
+    purpose, I don't need the user to draw in color, so the controls are disabled.
   </p>
 </div>
 

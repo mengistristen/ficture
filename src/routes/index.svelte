@@ -5,17 +5,17 @@
 
 <svelte:head><title>Ficture | Home</title></svelte:head>
 
-<div class="container">
-  <main class="content">
+<div class="content-container">
+  <main class="content" style="flex: 1">
     <Coastlines />
   </main>
-  <article class="content">
+  <article class="content" style="flex: 2">
     <About />
   </article>
 </div>
 
 <style>
-  .container {
+  .content-container {
     display: flex;
     flex-direction: row-reverse;
     flex-wrap: wrap;

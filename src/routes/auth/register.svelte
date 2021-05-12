@@ -76,10 +76,3 @@
   {/if}
   <p>Already have an account? <a href="/auth/login">Sign in!</a></p>
 </form>
-
-<style>
-  form {
-    max-width: 300px;
-    margin: 1em auto;
-  }
-</style>

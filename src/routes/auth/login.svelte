@@ -52,10 +52,3 @@
   {/if}
   <p>Don't have an account? <a href="/auth/register">Register!</a></p>
 </form>
-
-<style>
-  form {
-    max-width: 300px;
-    margin: 1em auto;
-  }
-</style>
