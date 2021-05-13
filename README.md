@@ -20,6 +20,8 @@ The project is split into several repositories:
 - Svelte / Sapper
 - Tensorflow / Tensorflow.js
 - WebComponent API
+- Amazon S3 / Cognito
+- MongoDB
 
 [ficture]: https://github.com/mengistristen/ficture
 [dataset]: https://github.com/mengistristen/ficture-terraingen
