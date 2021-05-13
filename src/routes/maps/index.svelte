@@ -72,6 +72,12 @@
     text-align: center;
   }
 
+  form {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+  }
+
   img {
     height: 200px;
     width: 200px;

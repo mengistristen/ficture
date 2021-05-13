@@ -1,7 +1,7 @@
 <div class="paper">
   <h1>About Ficture</h1>
   <p>
-    Ficture is made up of 4 seperate pieces: the <a
+    Ficture is made up of 4 pieces: the <a
       href="https://github.com/mengistristen/ficture-terraingen"
       target="_blank">dataset generation</a
     >, the
@@ -13,8 +13,9 @@
     >, and the
     <a href="https://github.com/mengistristen/ficture" target="_blank"
       >web application</a
-    >. Ficture, using a pix2pix GAN, attempts to allow users to generate
-    detailed terrain maps given a simple coastline drawing.
+    >. Ficture attempts to allow users to generate detailed terrain maps given a
+    simple coastline drawing. It also allows them to save, share, and view their
+    generated maps.
   </p>
   <h2>Dataset Generation</h2>
   <figure>
@@ -77,6 +78,19 @@
     feature of the app is showcased on the right with the usage of the
     <code>ficture-canvas</code> web component that I introduced earlier. For this
     purpose, I don't need the user to draw in color, so the controls are disabled.
+  </p>
+  <h2>Results</h2>
+  <p>
+    Overall, I think that this project allowed me to try out a lot of technology
+    that I haven't used before. While the result of the neural network is not as
+    satisfying as I could have hoped, I think that this project is a good
+    showcase for the technology. One of the main problems that I think could be
+    solved is the way that the dataset generation generates the coastline
+    outlines. The amount of detail that the network is trained on is quite
+    different from what a user would actually draw. I've also considered that a
+    pix2pix GAN might not be the best neural network to solve this problem, but
+    I'm still happy with the details that it <em>was</em> able to extract from the
+    training data.
   </p>
 </div>
 

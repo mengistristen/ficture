@@ -52,7 +52,7 @@
 
 <style>
   div {
-    max-width: 1000px;
+    max-width: 400px;
     margin: 1em auto;
     display: flex;
     flex-direction: column;
