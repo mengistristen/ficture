@@ -97,6 +97,7 @@
 <style>
   p {
     margin: 1em 2em;
+    line-height: 1.6;
   }
 
   a {

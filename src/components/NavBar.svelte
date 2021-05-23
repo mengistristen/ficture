@@ -21,6 +21,10 @@
         <a href="/auth/change-password">Change Password</a>
         <button class="button" on:click={logout}>Logout</button>
       </div>
+    {:else}
+      <div class="user-controls">
+        <a href="/auth/login">Log In</a>
+      </div>
     {/if}
   </div>
 </header>

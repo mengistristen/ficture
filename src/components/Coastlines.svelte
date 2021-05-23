@@ -10,26 +10,6 @@
   let exampleImage = ''
 
   onMount(async () => {
-    if (!$user.access_token || !$user.refresh_token || !$user.username) {
-      let res = await fetch('/user.json')
-
-      if (res.status === 200) {
-        const sessionData = await res.json()
-
-        res = await fetch('/auth/login.json', {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ refresh_token: sessionData.refresh_token })
-        })
-
-        const { access_token } = await res.json()
-
-        $user.access_token = access_token
-        $user.refresh_token = sessionData.refresh_token
-        $user.username = sessionData.username
-      } else goto('/auth/login')
-    }
-
     model = await tf.loadLayersModel('/model/model.json')
   })
 
@@ -164,7 +144,7 @@
           {/if}
           <canvas id="result-canvas" height="256" width="256" />
         </div>
-        {#if mapName}
+        {#if mapName && $user.access_token}
           <button class="button" on:click={save}>Save</button>
         {:else}
           <button class="button" disabled>Save</button>
