@@ -19,7 +19,7 @@
   </p>
   <h2>Dataset Generation</h2>
   <figure>
-    <img src="dataset_example.png" alt="Dataset example" style="width: 400px" />
+    <img src="dataset_example.png" alt="Dataset example" />
     <figcaption><strong>Figure 1</strong> - dataset example image</figcaption>
   </figure>
   <p>
@@ -43,11 +43,7 @@
   </p>
   <h2>Web Component</h2>
   <figure>
-    <img
-      src="canvas_controls.jpg"
-      alt="Canvas with controls"
-      style="width: 300px"
-    />
+    <img src="canvas_controls.jpg" alt="Canvas with controls" />
     <figcaption>
       <strong>Figure 2</strong> - canvas web component with controls enabled
     </figcaption>
@@ -116,6 +112,13 @@
   }
 
   figure img {
+    width: 400px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  }
+
+  @media only screen and (max-width: 600px) {
+    figure img {
+      width: 100%;
+    }
   }
 </style>

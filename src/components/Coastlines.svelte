@@ -163,7 +163,7 @@
   .paper {
     position: sticky;
     top: 1em;
-    width: 400px;
+    width: fit-content;
     margin: 0 auto;
   }
 
