@@ -18,7 +18,7 @@
     </nav>
     {#if $user.username}
       <div class="user-controls">
-        <a href="/auth/change-password">Change Password</a>
+        <a href="/auth/change-password" id="change-password">Change Password</a>
         <button class="button" on:click={logout}>Logout</button>
       </div>
     {:else}
@@ -69,5 +69,11 @@
     display: flex;
     align-items: baseline;
     gap: 1em;
+  }
+
+  @media only screen and (max-width: 600px) {
+    #change-password {
+      display: none;
+    }
   }
 </style>
