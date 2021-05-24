@@ -117,6 +117,10 @@
   }
 
   @media only screen and (max-width: 600px) {
+    p {
+      margin: 0.5em;
+    }
+
     figure img {
       width: 100%;
     }
