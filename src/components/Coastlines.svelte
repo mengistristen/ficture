@@ -251,4 +251,14 @@
     height: 256px;
     width: 256px;
   }
+
+  @media only screen and (max-width: 600px) {
+    .paper {
+      width: 100%;
+    }
+
+    #comparison {
+      flex-direction: column;
+    }
+  }
 </style>
