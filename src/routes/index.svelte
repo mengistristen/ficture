@@ -3,7 +3,15 @@
   import Coastlines from '../components/Coastlines.svelte'
 </script>
 
-<svelte:head><title>Ficture | Home</title></svelte:head>
+<svelte:head>
+  <title>Ficture | Home</title>
+  <meta property="og:title" content="Ficture" />
+  <meta property="og:description" content="Map generation using pix2pix GAN" />
+  <meta
+    property="og:image"
+    content="https://ficture.herokuapp.com/thumbnail.jpg"
+  />
+</svelte:head>
 
 <div class="content-container">
   <main class="content" style="flex: 1">

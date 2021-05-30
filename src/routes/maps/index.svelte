@@ -30,6 +30,12 @@
 <svelte:head>
   {#if user}
     <title>Ficture | {user}'s maps</title>
+    <meta property="og:title" content="Ficture" />
+    <meta property="og:description" content="View {user}'s maps!" />
+    <meta
+      property="og:image"
+      content="https://ficture.herokuapp.com/thumbnail.jpg"
+    />
   {:else}
     <title>Ficture | Maps</title>
   {/if}

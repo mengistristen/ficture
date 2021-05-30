@@ -16,6 +16,7 @@
 
 <script>
   import { goto } from '@sapper/app'
+  import About from '../../components/About.svelte'
   import { user } from '../../stores'
   export let map = {}
 
@@ -29,6 +30,14 @@
     }
   }
 </script>
+
+<svelte:head>
+  {#if Object.keys(map).length !== 0}
+    <meta property="og:title" content={map.name} />
+    <meta property="og:description" content="A map by {map.user}" />
+    <meta property="og:image" content={map.location} />
+  {/if}
+</svelte:head>
 
 <div class="paper">
   <img src="logo-512.png" alt="ficture logo" />
