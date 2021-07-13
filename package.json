@@ -1,6 +1,6 @@
 {
-  "name": "todo",
-  "description": "TODO",
+  "name": "ficture",
+  "description": "A web app for making world maps with machine learning",
   "version": "0.0.1",
   "scripts": {
     "dev": "sapper dev",

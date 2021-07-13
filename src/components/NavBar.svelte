@@ -10,22 +10,26 @@
 </script>
 
 <header>
-  <img src="logo-512.png" alt="ficture logo" />
-  <div class="controls">
-    <nav>
-      <p><strong><a href="/">Ficture</a></strong></p>
-      <p><a href="/maps?username={$user.username}">Maps</a></p>
-    </nav>
-    {#if $user.username}
-      <div class="user-controls">
-        <a href="/auth/change-password" id="change-password">Change Password</a>
-        <button class="button" on:click={logout}>Logout</button>
-      </div>
-    {:else}
-      <div class="user-controls">
-        <a href="/auth/login">Log In</a>
-      </div>
-    {/if}
+  <div class="container">
+    <img src="logo-512.png" alt="ficture logo" />
+    <div class="controls">
+      <nav>
+        <p><strong><a href="/">Ficture</a></strong></p>
+        <p><a href="/maps?username={$user.username}">Maps</a></p>
+      </nav>
+      {#if $user.username}
+        <div class="user-controls">
+          <a href="/auth/change-password" id="change-password"
+            >Change Password</a
+          >
+          <button class="button" on:click={logout}>Logout</button>
+        </div>
+      {:else}
+        <div class="user-controls">
+          <a href="/auth/login">Log In</a>
+        </div>
+      {/if}
+    </div>
   </div>
 </header>
 
@@ -39,8 +43,13 @@
   header {
     background-color: white;
     box-shadow: 0 0 5px 0 black;
-    display: flex;
     z-index: 1;
+  }
+
+  header > div {
+    max-width: 1500px;
+    margin: auto;
+    display: flex;
   }
 
   nav {
